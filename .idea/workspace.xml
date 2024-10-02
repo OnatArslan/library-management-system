@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routers/testRouter.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/routers/testRouter.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +37,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Node.js.app.mjs.executor": "Run",
+    "Node.js.server.mjs.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
@@ -73,7 +71,7 @@
       <workItem from="1727895856682" duration="16000" />
       <workItem from="1727895891648" duration="460000" />
       <workItem from="1727896359563" duration="1084000" />
-      <workItem from="1727897474570" duration="200000" />
+      <workItem from="1727897474570" duration="723000" />
     </task>
     <servers />
   </component>
