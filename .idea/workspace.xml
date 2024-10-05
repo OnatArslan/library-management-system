@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/server.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/app.mjs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -48,7 +49,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.rainbow.brackets.root",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
@@ -76,7 +77,13 @@
       <workItem from="1727897474570" duration="1063000" />
       <workItem from="1727898566778" duration="224000" />
       <workItem from="1727898803030" duration="59000" />
-      <workItem from="1727898867707" duration="336000" />
+      <workItem from="1727898867707" duration="381000" />
+      <workItem from="1727912303194" duration="354000" />
+      <workItem from="1727913231367" duration="1406000" />
+      <workItem from="1728160115483" duration="17000" />
+      <workItem from="1728160414448" duration="46000" />
+      <workItem from="1728161524992" duration="15000" />
+      <workItem from="1728167176261" duration="81000" />
     </task>
     <servers />
   </component>
