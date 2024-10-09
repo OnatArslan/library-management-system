@@ -1,16 +1,18 @@
 model User {
-  id           String             @id @default(cuid())
-  email        String             @unique
-  username     String
-  bio          String             @db.Text
-  password     String
+  id                String             @id @default(cuid())
+  email             String             @unique
+  username          String
+  bio               String             @db.Text
+  password          String
+  passwordChangedAt DateTime?
+  createdAt         DateTime           @default(now())
   // REFERANCES
   // 1) For booked owner one to many
-  currentBooks Book[]
+  currentBooks      Book[]
   // 2) For liked books
-  likedBooks   UserLikedBooks[]
+  likedBooks        UserLikedBooks[]
   // 3) For old booked books
-  oldBookings  UserPastBookings[]
+  oldBookings       UserPastBookings[]
 
   // In followers data current user is following based on junction table because of that our releation name is crossed
   followers UserFollow[] @relation("following")
