@@ -9,4 +9,6 @@ model Review {
 
   bookId      String
   relatedBook Book   @relation(fields: [bookId], references: [id])
+
+  @@map("review")
 }
