@@ -1,11 +1,20 @@
 model UserFollow {
-  followerId String
+  createdAt DateTime @default(now())
+  status    Status   @default(PENDING)
 
-  follower User @relation("follower", fields: [followerId], references: [id])
+  // RELEATION FIELDS
+  followerId String
+  follower   User   @relation("follower", fields: [followerId], references: [id])
 
   followingId String
-
-  following User @relation("following", fields: [followingId], references: [id])
+  following   User   @relation("following", fields: [followingId], references: [id])
 
   @@id([followingId, followerId])
+  @@map("user_follow")
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  DECLINED
 }

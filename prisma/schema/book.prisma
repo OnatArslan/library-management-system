@@ -1,9 +1,12 @@
 model Book {
   id             String             @id @default(cuid())
-  isbn           String
+  isbn           String             @unique
   title          String
   authors        String[]
+  category       BookCategory       @default(OTHER)
   isBooked       Boolean            @default(false)
+  publishedAt    DateTime?
+  createdAt      DateTime           @default(now())
   // REFERANCES
   // 1) For booked owner one to many
   currentOwnerId String
@@ -13,6 +16,36 @@ model Book {
   // 3) For users book this book before
   oldBookedBy    UserPastBookings[]
 
+  reviews Review[]
+
   @@index([title, id])
   @@map("book")
+}
+
+enum BookCategory {
+  FICTION // General fiction
+  LITERARY_FICTION // Character-driven stories
+  HISTORICAL_FICTION // Stories set in historical contexts
+  MYSTERY // Mystery and thriller novels
+  THRILLER // Suspenseful stories
+  SCIENCE_FICTION // Speculative fiction exploring futuristic concepts
+  FANTASY // Stories with magical or supernatural elements
+  HORROR // Horror and suspense novels
+  ROMANCE // Romantic stories
+  ADVENTURE // Adventure tales and explorations
+  NON_FICTION // General non-fiction
+  BIOGRAPHY // Life stories and autobiographies
+  SELF_HELP // Books aimed at personal development
+  HISTORY // Historical non-fiction
+  TRAVEL // Travel guides and narratives
+  COOKBOOK // Cookbooks and culinary guides
+  HEALTH_WELLNESS // Health and wellness guides
+  BUSINESS // Business and economic literature
+  SCIENCE // Science-related books
+  YOUNG_ADULT // Young adult fiction
+  CHILDRENS // Children's literature
+  GRAPHIC_NOVEL // Graphic novels and comic books
+  POETRY // Poetry collections
+  CLASSIC_LITERATURE // Classic literature
+  OTHER
 }

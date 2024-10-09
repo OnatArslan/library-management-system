@@ -20,5 +20,7 @@ model User {
   // In followings data current user is follower based on junction table because of that our releation name is crossed
   followings UserFollow[] @relation("follower")
 
+  submittedReviews Review[]
+
   @@map("user")
 }
