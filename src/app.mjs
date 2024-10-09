@@ -8,7 +8,8 @@ import expressSession from "express-session";
 import {rateLimit} from "express-rate-limit";
 
 
-import testRouter from "./router/testRouter.mjs";
+
+import authRouter from "./router/auth-router.mjs";
 
 let app = express();
 
@@ -40,7 +41,8 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-app.use(`/test`, testRouter)
+// USING ROUTERS----------------------------------------------------------
+app.use(`/auth`,authRouter)
 
 app.use(`*`,
     (req, res, next) => {
