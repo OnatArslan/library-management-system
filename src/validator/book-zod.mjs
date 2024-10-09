@@ -2,7 +2,7 @@ import {z} from "zod";
 import isISBN from "validator/es/lib/isISBN.js";
 
 
-const bookZod = {
+const bookZod = z.object({
     id: z.string().cuid().optional(),
     isbn: z.string().refine((val) => isISBN(val), {
         message: `Invalid ISBN format`
@@ -15,6 +15,6 @@ const bookZod = {
     
     
     
-};
+});
 
 export default bookZod;
