@@ -1,17 +1,17 @@
 model Book {
-  id             String               @id @default(cuid())
+  id             String             @id @default(cuid())
   isbn           String
   title          String
   authors        String[]
-  isBooked       Boolean              @default(false)
+  isBooked       Boolean            @default(false)
   // REFERANCES
   // 1) For booked owner one to many
   currentOwnerId String
-  currentOwner   User                 @relation(references: [id], fields: [currentOwnerId])
+  currentOwner   User               @relation(references: [id], fields: [currentOwnerId])
   // 2) For users who like the book
-  likedByUsers   user_liked_books[]
+  likedByUsers   UserLikedBooks[]
   // 3) For users book this book before
-  oldBookedBy    user_past_bookings[]
+  oldBookedBy    UserPastBookings[]
 
   @@index([title, id])
   @@map("book")

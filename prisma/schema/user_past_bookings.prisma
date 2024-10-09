@@ -1,4 +1,4 @@
-model user_past_bookings {
+model UserPastBookings {
   userId String
   user   User   @relation(fields: [userId], references: [id])
   bookId String

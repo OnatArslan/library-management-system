@@ -1,4 +1,4 @@
-model user_liked_books {
+model UserLikedBooks {
   userId String
   user   User   @relation(fields: [userId], references: [id])
   bookId String
