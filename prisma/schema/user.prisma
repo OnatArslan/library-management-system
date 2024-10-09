@@ -1,6 +1,7 @@
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
-  username String
-  password String
+  id           String @id @default(cuid())
+  email        String @unique
+  username     String
+  password     String
+  currentBooks Book[]
 }

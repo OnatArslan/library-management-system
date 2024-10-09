@@ -1,9 +1,11 @@
 model Book {
-  id       String   @id @default(cuid())
-  isbn     String
-  title    String
-  authors  String[]
-  isBooked Boolean  @default(true)
+  id             String   @id @default(cuid())
+  isbn           String
+  title          String
+  authors        String[]
+  isBooked       Boolean  @default(true)
+  currentOwnerId String
+  currentOwner   User     @relation(references: [id], fields: [currentOwnerId])
 
   @@index([title, id])
 }
