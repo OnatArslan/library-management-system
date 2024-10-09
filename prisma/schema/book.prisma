@@ -1,0 +1,9 @@
+model Book {
+  id       String   @id @default(cuid())
+  isbn     String
+  title    String
+  authors  String[]
+  isBooked Boolean  @default(true)
+
+  @@index([title, id])
+}

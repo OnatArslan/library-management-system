@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/database/prisma.mjs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/schema/book.prisma" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/prisma/schema/user.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/testController.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/testController.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routers/testRouter.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/testRouter.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +93,7 @@
       <workItem from="1728167337058" duration="114000" />
       <workItem from="1728175225246" duration="5000" />
       <workItem from="1728436302177" duration="77000" />
-      <workItem from="1728438987088" duration="2062000" />
+      <workItem from="1728438987088" duration="3862000" />
     </task>
     <servers />
   </component>
