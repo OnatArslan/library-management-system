@@ -1,5 +1,5 @@
 import express from "express";
-import {getTest} from "../controllers/testController.mjs";
+import {getTest} from "../controller/testController.mjs";
 const router = express.Router();
 
 router.route(`/`).get(getTest)

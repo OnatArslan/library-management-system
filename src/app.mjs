@@ -8,7 +8,7 @@ import expressSession from "express-session";
 import {rateLimit} from "express-rate-limit";
 
 
-import testRouter from "./routers/testRouter.mjs";
+import testRouter from "./router/testRouter.mjs";
 
 let app = express();
 
