@@ -6,6 +6,7 @@ model Book {
   category       BookCategory       @default(OTHER)
   isBooked       Boolean            @default(false)
   publishedAt    DateTime?
+  totalScore     Decimal            @default(0)
   createdAt      DateTime           @default(now())
   // REFERANCES
   // 1) For booked owner one to many
