@@ -1,0 +1,8 @@
+model user_past_bookings {
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+  bookId String
+  book   Book   @relation(fields: [bookId], references: [id])
+
+  @@id([userId, bookId])
+}
