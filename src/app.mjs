@@ -9,6 +9,7 @@ import {rateLimit} from "express-rate-limit";
 
 // IMPORT ROUTERS
 import authRouter from "./router/auth-router.mjs";
+import bookRouter from "./router/book-router.mjs";
 
 let app = express();
 
@@ -42,6 +43,8 @@ app.use(limiter);
 
 // USING ROUTERS----------------------------------------------------------
 app.use(`/auth`,authRouter)
+app.use(`/book`,bookRouter)
+
 
 app.use(`*`,
     (req, res, next) => {
