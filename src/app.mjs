@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import compression from "compression";
 import expressSession from "express-session";
-import { rateLimit } from "express-rate-limit";
+import {rateLimit} from "express-rate-limit";
 
 
 import testRouter from "./routers/testRouter.mjs";
@@ -41,6 +41,26 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use(`/test`, testRouter)
+
+app.use(`*`,
+    (req, res, next) => {
+        res.status(404).json({
+            status: `fail`,
+            message: `Invalid path`
+        })
+    })
+
+// Error handling middleware
+// noinspection JSCheckFunctionSignatures
+app.use((err, req, res, next) => {
+    const {stack} = err;
+    console.error(stack);
+    res.status(500).json({
+        status: 'error',
+        message: 'Something went wrong!',
+    });
+});
+
 export default app;
 
 
