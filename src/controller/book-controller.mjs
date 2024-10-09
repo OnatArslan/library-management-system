@@ -20,10 +20,15 @@ export const createBook = async(req,res,next) =>{
              newBook = await prisma.book.create({
                 data:{
                     ...validData
-                }
+                },
+                 omit:{
+                     currentOwnerId: true,
+                     createdAt: true,
+                     
+                 }
             })
         }catch(e){
-            return next(e)
+            return next(e.stack)
         }
         res.status(200).json({
             status:`success`,

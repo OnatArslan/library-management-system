@@ -58,11 +58,11 @@ app.use(`*`,
 
 // noinspection JSCheckFunctionSignatures
 app.use((err, req, res, next) => {
-    const {stack} = err;
-    console.error(stack);
+    
+    console.error(err);
     res.status(500).json({
         status: 'error',
-        message: 'Something went wrong!',
+        message: err,
     });
 });
 
