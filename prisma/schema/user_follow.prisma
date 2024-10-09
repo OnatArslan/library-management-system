@@ -1,0 +1,11 @@
+model user_follow {
+  followerId String
+  // Eger A acisindan A B nin follower'i ise A, B'yi following tableinde gorur bu yuzden releation name capraz olmali
+  follower   User   @relation("userFollowings", fields: [followerId], references: [id])
+
+  followingId String
+  // Eger A acisindan A B tarafindan takip edilen kisi ise A B'yi follower tarafinda gorur bu yuzden releation name capraz olmali
+  following   User   @relation("userFollowers", fields: [followingId], references: [id])
+
+  @@id([followingId, followerId])
+}

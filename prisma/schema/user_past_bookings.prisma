@@ -4,5 +4,7 @@ model user_past_bookings {
   bookId String
   book   Book   @relation(fields: [bookId], references: [id])
 
+  // This ensures that one book can added to books old booked books fields once
   @@id([userId, bookId])
+  @@map("user_past_bookings")
 }

@@ -11,4 +11,10 @@ model User {
   likedBooks   user_liked_books[]
   // 3) For old booked books
   oldBookings  user_past_bookings[]
+
+  followers user_follow[] @relation("userFollowers")
+
+  followings user_follow[] @relation("userFollowings")
+
+  @@map("user")
 }

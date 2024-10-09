@@ -4,5 +4,7 @@ model user_liked_books {
   bookId String
   book   Book   @relation(fields: [bookId], references: [id])
 
+  // Ensure that a user can like a book only once
   @@id([userId, bookId])
+  @@map("user_liked_books")
 }
