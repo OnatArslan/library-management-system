@@ -7,8 +7,7 @@ import compression from "compression";
 import expressSession from "express-session";
 import {rateLimit} from "express-rate-limit";
 
-
-
+// IMPORT ROUTERS
 import authRouter from "./router/auth-router.mjs";
 
 let app = express();
