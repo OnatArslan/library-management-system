@@ -1,4 +1,6 @@
 import bookZod from "../validator/book-zod.mjs";
+import prisma from "../database/prisma.mjs";
+
 
 
 export const createBook = async(req,res,next) =>{
@@ -7,7 +9,10 @@ export const createBook = async(req,res,next) =>{
         let validData;
         let newBook;
         try {
-            validData = bookZod.parse(req.body);
+            validData = bookZod.parse({
+                ...req.body,
+                publishedAt:new Date(req.body.publishedAt)
+            });
         } catch(e) {
             return next(e)
         }

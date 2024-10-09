@@ -10,8 +10,8 @@ model Book {
   createdAt      DateTime           @default(now())
   // REFERANCES
   // 1) For booked owner one to many
-  currentOwnerId String
-  currentOwner   User               @relation(references: [id], fields: [currentOwnerId])
+  currentOwnerId String?
+  currentOwner   User?              @relation(references: [id], fields: [currentOwnerId])
   // 2) For users who like the book
   likedByUsers   UserLikedBooks[]
   // 3) For users book this book before
