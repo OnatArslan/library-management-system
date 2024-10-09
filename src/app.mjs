@@ -51,6 +51,7 @@ app.use(`*`,
     })
 
 // Error handling middleware
+
 // noinspection JSCheckFunctionSignatures
 app.use((err, req, res, next) => {
     const {stack} = err;
