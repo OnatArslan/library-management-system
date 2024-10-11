@@ -113,17 +113,18 @@ export const signIn = async(req,res,next) =>{
 
 export const authenticate = async(req,res,next) =>{
   try {
+// 1. Extract the token from the request cookies.
+    const token = req.cookies.token
+    console.log(token)
     /*
-1. Extract the token from the request cookies.
-
-2. Verify the JWT token.
-3. Decode the token to get the user ID.
-4. Fetch the user from the database using the user ID.
-5. If the user does not exist, return an error.
-6. Attach the user to the request object.
-7. Call the `next` middleware function.
-*/
-  
+    2. Verify the JWT token.
+    3. Decode the token to get the user ID.
+    4. Fetch the user from the database using the user ID.
+    5. If the user does not exist, return an error.
+    6. Attach the user to the request object.
+    7. Call the `next` middleware function.
+    */
+    next();
   }catch(e) {
     next(e)
   }
