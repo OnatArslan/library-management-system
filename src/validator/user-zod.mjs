@@ -11,9 +11,15 @@ const userZodSchema = z.object({
     password: z.string().min(8, {
         message: "Password must be at least 8 characters long."
     }),
-    passwordChangedAt: z.date().optional().refine((val) => val instanceof Date, {
-        message: "Password changed date must be a valid DateTime."
-    }), // Optional but should still be a valid date if provided
+    confirmPassword: z.string({
+        message: "Confirm password is required."
+    }),
+     // Optional but should still be a valid date if provided
+}).refine((user) =>{
+    return user.password === user.confirmPassword;
+},{
+    message:"Password do not match",
+    path:["confirmPassword"]
 });
 
 export default userZodSchema;
