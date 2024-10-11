@@ -41,3 +41,48 @@ export const createBook = async(req,res,next) =>{
         next(e)
     }
 }
+
+export const getAllBooks = async(req,res,next) =>{
+    try{
+        const books = await prisma.book.findMany({
+            where:{
+                isBooked:false,
+                currentOwnerId:null
+            },
+            omit:{
+                currentOwnerId:true
+            }
+        });
+        res.status(200).json({
+            status:`success`,
+            data:{
+                books
+            }
+        })
+    }catch(e) {
+        next(e)
+    }
+}
+
+export const getBook = async(req,res,next) =>{
+    try{
+        const bookId = req.params.bookId;
+        
+        const book = await prisma.book.findUnique({
+            where:{
+                id:bookId
+            },
+            omit:{
+                currentOwnerId:true
+            }
+        });
+        res.status(200).json({
+            status:`success`,
+            data:{
+                book
+            }
+        })
+    }catch(e) {
+        next(e)
+    }
+}
