@@ -14,6 +14,7 @@ const userZodSchema = z.object({
     confirmPassword: z.string({
         message: "Confirm password is required."
     }),
+    role:z.enum(["ADMIN","USER"]).default("USER")
      // Optional but should still be a valid date if provided
 }).refine((user) =>{
     return user.password === user.confirmPassword;

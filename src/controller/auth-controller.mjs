@@ -9,7 +9,10 @@ export const signUp = async(req,res,next) =>{
         let rawData = req.body;
         /* Check data is valid */
         try{
-            validData = userZod.parse(rawData);
+            validData = userZod.parse({
+              ...rawData,
+              role:"USER"
+            });
         }catch(e){
             return next(e)
         }
