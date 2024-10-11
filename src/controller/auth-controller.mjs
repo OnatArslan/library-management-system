@@ -1,7 +1,7 @@
 import prisma from "../database/prisma.mjs";
 import userZod from "../validator/user-zod.mjs";
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken"
 
 export const signUp = async(req,res,next) =>{
     try {
@@ -34,6 +34,15 @@ export const signUp = async(req,res,next) =>{
         }catch(e){
             return next(e)
         }
+        
+        const jwtToken = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
+            expiresIn: "2 days",
+        })
+        
+        res.cookie('token', jwtToken, {
+            httpOnly: true,
+            secure: true,
+        });
         
         res.status(200).json({
             status:`success`,
