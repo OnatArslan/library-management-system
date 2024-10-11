@@ -3,6 +3,7 @@ import prisma from "../database/prisma.mjs";
 
 
 
+
 export const createBook = async(req,res,next) =>{
     try {
         //     Test if data is valid
@@ -45,6 +46,9 @@ export const createBook = async(req,res,next) =>{
 export const bulkCreateBooks = async(req,res,next)=>{
     try {
         let books
+        req.body.forEach(el =>{
+            el.publishedAt = new Date(el.publishedAt);
+        })
         try{
             books = await prisma.book.createManyAndReturn({
             data:req.body
@@ -109,3 +113,24 @@ export const getBook = async(req,res,next) =>{
     }
 }
 
+export const deleteBook = async(req,res,next) =>{
+    try{
+        const bookId = req.params.bookId;
+        try{
+            await prisma.book.delete({
+                where:{
+                    id:bookId,
+                    isBooked: false,
+                }
+            })
+        }catch(e) {
+            return next(e)
+        }
+        res.status(200).json({
+            status:`success`,
+            message:`Book deleted...`
+        })
+    }catch(e) {
+        next(e)
+    }
+}
