@@ -37,26 +37,23 @@ export const signUp = async(req,res,next) =>{
             return next(e)
         }
         // Create jwt token
-        let jwtToken;
+        let token;
         try {
-        jwtToken = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
+        token = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
             expiresIn: "2 days",
         })
         }catch(e) {
             return next(e)
         }
         
-        res.cookie('token', jwtToken, {
+        res.cookie('token', token, {
             httpOnly: true,
             secure: true,
         });
         
         res.status(200).json({
             status:`success`,
-            data:{
-                newUser,
-                
-            }
+            message:`${newUser.username} created and logged in successfully`
         })
     }catch(e) {
         next(e)
@@ -67,8 +64,8 @@ export const signUp = async(req,res,next) =>{
 export const signIn = async(req,res,next) =>{
     try {
       // 1) Get user credentials
-      const {email, rawPassword} = req.body;
-      if(!email || !rawPassword) return next(new Error(`Missing credentials`));
+      const {email, password} = req.body;
+      if(!email || !password) {return next(new Error(`Missing credentials`))}
       
       // 2) Find user in database
       const user = await prisma.user.findUnique({
@@ -80,12 +77,27 @@ export const signIn = async(req,res,next) =>{
       if(!user) return next(new Error(`Invalid email`));
       
       // 3) Compare password
-      const match = await bcrypt.compare(rawPassword,user.password)
-      console.log(match, rawPassword, user.password);
+      const match = await bcrypt.compare(password,user.password)
       
+      if(!match){
+        return next(new Error(`Invalid credentials`))
+      }
+      let token;
+      try{
+      token = jwt.sign({id:user.id},process.env.JWT_SECRET_KEY,{
+        expiresIn: "2 days"
+      } )
+      }catch(e) {
+        return next(e)
+      }
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,
+      });
       res.status(200).json({
         status: `success`,
-        message: "user logged in",
+        message: `${user.username} logged in successfully`,
+        token: token,
         
       })
     }catch(e) {
