@@ -4,7 +4,7 @@ const userZodSchema = z.object({
     email: z.string().email({
         message: "Invalid email format. Please enter a valid email."
     }),
-    username: z.string().min(1, {
+    username: z.string().min(4, {
         message: "Username is required and cannot be empty."
     }),
     bio: z.string().optional(), // No message since it's optional
