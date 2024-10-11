@@ -77,7 +77,7 @@ export const signIn = async(req,res,next) =>{
         }
       })
       // If user didn't found return error
-      if(!user) return next(new Error(`Invalid email`));
+      if(!user) return next(new Error(`Invalid credentials`));
       
       // 3) Compare password
       const match = await bcrypt.compare(password,user.password)
@@ -85,6 +85,8 @@ export const signIn = async(req,res,next) =>{
       if(!match){
         return next(new Error(`Invalid credentials`))
       }
+      
+      
       let token;
       try{
       token = jwt.sign({id:user.id},process.env.JWT_SECRET_KEY,{
