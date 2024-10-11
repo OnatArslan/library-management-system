@@ -7,7 +7,6 @@
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/book-controller.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/book-controller.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/book-router.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/book-router.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +100,7 @@
       <workItem from="1728438987088" duration="11127000" />
       <workItem from="1728453120924" duration="1203000" />
       <workItem from="1728471027188" duration="2882000" />
-      <workItem from="1728614064249" duration="1086000" />
+      <workItem from="1728614064249" duration="1607000" />
     </task>
     <servers />
   </component>

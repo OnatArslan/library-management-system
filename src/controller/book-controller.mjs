@@ -42,6 +42,14 @@ export const createBook = async(req,res,next) =>{
     }
 }
 
+export const bulkCreateBooks = async(req,res,next)=>{
+    try {
+    
+    } catch(e){
+        next(e)
+    }
+}
+
 export const getAllBooks = async(req,res,next) =>{
     try{
         const books = await prisma.book.findMany({
@@ -86,3 +94,4 @@ export const getBook = async(req,res,next) =>{
         next(e)
     }
 }
+
