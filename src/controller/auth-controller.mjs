@@ -115,6 +115,7 @@ export const authenticate = async(req,res,next) =>{
   try {
     /*
 1. Extract the token from the request cookies.
+
 2. Verify the JWT token.
 3. Decode the token to get the user ID.
 4. Fetch the user from the database using the user ID.

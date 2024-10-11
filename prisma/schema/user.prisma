@@ -4,7 +4,7 @@ model User {
   username          String             @unique
   bio               String?            @db.Text
   password          String
-  passwordChangedAt DateTime?
+  passwordChangedAt DateTime           @default(now())
   createdAt         DateTime           @default(now())
   role              UserRole           @default(USER)
   // RELATIONS
