@@ -42,8 +42,8 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // USING ROUTERS----------------------------------------------------------
-app.use(`/auth`,authRouter)
-app.use(`/book`,bookRouter)
+app.use(`/api/v1/auth`,authRouter)
+app.use(`/api/v1/book`,bookRouter)
 
 
 app.use(`*`,
