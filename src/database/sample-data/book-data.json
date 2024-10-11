@@ -1,0 +1,212 @@
+[
+  {
+    "isbn": "9781408855652",
+    "title": "Harry Potter and the Philosopher's Stone",
+    "authors": ["J.K. Rowling"],
+    "category": "FANTASY",
+    "publishedAt": "1997-06-26"
+  },
+  {
+    "isbn": "9780439139601",
+    "title": "Harry Potter and the Goblet of Fire",
+    "authors": ["J.K. Rowling"],
+    "category": "FANTASY",
+    "publishedAt": "2000-07-08"
+  },
+  {
+    "isbn": "9780061120084",
+    "title": "To Kill a Mockingbird",
+    "authors": ["Harper Lee"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1960-07-11"
+  },
+  {
+    "isbn": "9780743273565",
+    "title": "The Great Gatsby",
+    "authors": ["F. Scott Fitzgerald"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1925-04-10"
+  },
+  {
+    "isbn": "9780316769488",
+    "title": "The Catcher in the Rye",
+    "authors": ["J.D. Salinger"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1951-07-16"
+  },
+  {
+    "isbn": "9780547928227",
+    "title": "The Hobbit",
+    "authors": ["J.R.R. Tolkien"],
+    "category": "FANTASY",
+    "publishedAt": "1937-09-21"
+  },
+  {
+    "isbn": "9780439358071",
+    "title": "Harry Potter and the Order of the Phoenix",
+    "authors": ["J.K. Rowling"],
+    "category": "FANTASY",
+    "publishedAt": "2003-06-21"
+  },
+  {
+    "isbn": "9781449331818",
+    "title": "Learning JavaScript Design Patterns",
+    "authors": ["Addy Osmani"],
+    "category": "NON_FICTION",
+    "publishedAt": "2012-08-30"
+  },
+  {
+    "isbn": "9780590353427",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "authors": ["J.K. Rowling"],
+    "category": "FANTASY",
+    "publishedAt": "1998-09-01"
+  },
+  {
+    "isbn": "9780198321668",
+    "title": "Romeo and Juliet",
+    "authors": ["William Shakespeare"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1597-01-01"
+  },
+  {
+    "isbn": "9780140449136",
+    "title": "The Odyssey",
+    "authors": ["Homer"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "800-01-01"
+  },
+  {
+    "isbn": "9780316015844",
+    "title": "Twilight",
+    "authors": ["Stephenie Meyer"],
+    "category": "YOUNG_ADULT",
+    "publishedAt": "2005-10-05"
+  },
+  {
+    "isbn": "9780451524935",
+    "title": "1984",
+    "authors": ["George Orwell"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1949-06-08"
+  },
+  {
+    "isbn": "9780060850524",
+    "title": "Brave New World",
+    "authors": ["Aldous Huxley"],
+    "category": "SCIENCE_FICTION",
+    "publishedAt": "1932-01-01"
+  },
+  {
+    "isbn": "9780743455961",
+    "title": "Angels and Demons",
+    "authors": ["Dan Brown"],
+    "category": "THRILLER",
+    "publishedAt": "2000-05-23"
+  },
+  {
+    "isbn": "9780307474278",
+    "title": "The Road",
+    "authors": ["Cormac McCarthy"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "2006-09-26"
+  },
+  {
+    "isbn": "9780060935467",
+    "title": "The Alchemist",
+    "authors": ["Paulo Coelho"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "1988-05-01"
+  },
+  {
+    "isbn": "9780316769174",
+    "title": "Franny and Zooey",
+    "authors": ["J.D. Salinger"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "1961-09-14"
+  },
+  {
+    "isbn": "9780553296983",
+    "title": "Dune",
+    "authors": ["Frank Herbert"],
+    "category": "SCIENCE_FICTION",
+    "publishedAt": "1965-08-01"
+  },
+  {
+    "isbn": "9780143127741",
+    "title": "The Goldfinch",
+    "authors": ["Donna Tartt"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "2013-10-22"
+  },
+  {
+    "isbn": "9780525478812",
+    "title": "Looking for Alaska",
+    "authors": ["John Green"],
+    "category": "YOUNG_ADULT",
+    "publishedAt": "2005-03-03"
+  },
+  {
+    "isbn": "9780062457799",
+    "title": "The Handmaid's Tale",
+    "authors": ["Margaret Atwood"],
+    "category": "SCIENCE_FICTION",
+    "publishedAt": "1985-09-01"
+  },
+  {
+    "isbn": "9780553380163",
+    "title": "The Kite Runner",
+    "authors": ["Khaled Hosseini"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "2003-05-29"
+  },
+  {
+    "isbn": "9780061120084",
+    "title": "The Sun Also Rises",
+    "authors": ["Ernest Hemingway"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1926-10-22"
+  },
+  {
+    "isbn": "9780156012195",
+    "title": "The Little Prince",
+    "authors": ["Antoine de Saint-Exupéry"],
+    "category": "CHILDRENS",
+    "publishedAt": "1943-04-06"
+  },
+  {
+    "isbn": "9781451648539",
+    "title": "Steve Jobs",
+    "authors": ["Walter Isaacson"],
+    "category": "BIOGRAPHY",
+    "publishedAt": "2011-10-24"
+  },
+  {
+    "isbn": "9781400033416",
+    "title": "The Brief Wondrous Life of Oscar Wao",
+    "authors": ["Junot Díaz"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "2007-09-06"
+  },
+  {
+    "isbn": "9780143039433",
+    "title": "The Namesake",
+    "authors": ["Jhumpa Lahiri"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "2003-09-01"
+  },
+  {
+    "isbn": "9780385490818",
+    "title": "The Poisonwood Bible",
+    "authors": ["Barbara Kingsolver"],
+    "category": "LITERARY_FICTION",
+    "publishedAt": "1998-10-06"
+  },
+  {
+    "isbn": "9780060853989",
+    "title": "The Stranger",
+    "authors": ["Albert Camus"],
+    "category": "CLASSIC_LITERATURE",
+    "publishedAt": "1942-01-01"
+  }
+]

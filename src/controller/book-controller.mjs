@@ -44,6 +44,20 @@ export const createBook = async(req,res,next) =>{
 
 export const bulkCreateBooks = async(req,res,next)=>{
     try {
+        let books
+        try{
+            books = await prisma.book.createManyAndReturn({
+            data:req.body
+        })
+        }catch(e){
+            return next(e);
+        }
+        res.status(200).json({
+            status:`success`,
+            data:{
+                books,
+            }
+        })
     
     } catch(e){
         next(e)
