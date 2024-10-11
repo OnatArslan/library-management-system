@@ -66,7 +66,28 @@ export const signUp = async(req,res,next) =>{
 
 export const signIn = async(req,res,next) =>{
     try {
-    
+      // 1) Get user credentials
+      const {email, rawPassword} = req.body;
+      if(!email || !rawPassword) return next(new Error(`Missing credentials`));
+      
+      // 2) Find user in database
+      const user = await prisma.user.findUnique({
+        where:{
+          email:email
+        }
+      })
+      // If user didn't found return error
+      if(!user) return next(new Error(`Invalid email`));
+      
+      // 3) Compare password
+      const match = await bcrypt.compare(rawPassword,user.password)
+      console.log(match, rawPassword, user.password);
+      
+      res.status(200).json({
+        status: `success`,
+        message: "user logged in",
+        
+      })
     }catch(e) {
         next(e)
     }
