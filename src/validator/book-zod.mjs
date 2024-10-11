@@ -1,10 +1,13 @@
 import {z} from "zod";
 
+import isISBN from "validator/lib/isISBN.js";
 
 
 const bookZod = z.object({
     id: z.string().cuid().optional(),
-    isbn: z.string(),
+    isbn: z.string().refine((val) => isISBN(val),{
+        message:"Invalid ISBN is given please check again"
+    }),
     title: z.string().min(2, `Book title must have at least 2 characters`),
     authors: z.array(z.string()),
     category: z.enum([
@@ -16,13 +19,13 @@ const bookZod = z.object({
     ]),
     isBooked: z.boolean().default(false),
     publishedAt: z.date().optional(),
-    totalScore: z.instanceof(Decimal).default(new Decimal(0)),
-    createdAt: z.date().default(new Date()),
+    createdAt: z.date().optional(),
     currentOwnerId: z.string().cuid().optional(),
     likedByUsers: z.array(z.string()).optional(),
     oldBookedBy: z.array(z.string()).optional(),
     reviews: z.array(z.string()).optional()
 });
+
 
 
 
