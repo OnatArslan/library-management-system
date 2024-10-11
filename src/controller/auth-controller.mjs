@@ -15,9 +15,11 @@ export const signUp = async(req,res,next) =>{
         }
         delete validData.confirmPassword;
         // Hash password
-        const hashedPassword = await bcrypt.hash(validData.password, 10);
-        if(!hashedPassword){
-            return next(new Error(`Password can not hashed`));
+        let hashedPassword
+        try{
+        hashedPassword = await bcrypt.hash(validData.password, 10);
+        }catch(e) {
+            return next(e)
         }
         // Create new user with valid data
         let newUser
@@ -34,10 +36,15 @@ export const signUp = async(req,res,next) =>{
         }catch(e){
             return next(e)
         }
-        
-        const jwtToken = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
+        // Create jwt token
+        let jwtToken;
+        try {
+        jwtToken = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
             expiresIn: "2 days",
         })
+        }catch(e) {
+            return next(e)
+        }
         
         res.cookie('token', jwtToken, {
             httpOnly: true,
@@ -51,6 +58,15 @@ export const signUp = async(req,res,next) =>{
                 
             }
         })
+    }catch(e) {
+        next(e)
+    }
+}
+
+
+export const signIn = async(req,res,next) =>{
+    try {
+    
     }catch(e) {
         next(e)
     }
