@@ -4,6 +4,10 @@ import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
 import {signJwt} from "../utils/sendJwt.mjs";
+import {
+  StatusCodes
+} from 'http-status-codes';
+
 
 export const signUp = async(req,res,next) =>{
     try {
