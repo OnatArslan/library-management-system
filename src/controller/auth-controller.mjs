@@ -1,5 +1,5 @@
 import prisma from "../database/prisma.mjs";
-import {userRegisterZodSchema} from "../validator/user-zod.mjs";
+import {userLoginZodSchema, userRegisterZodSchema, userZodSchema} from "../validator/user-zod.mjs";
 import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
@@ -73,12 +73,19 @@ export const signIn = async(req,res,next) =>{
     try {
       // 1) Get user credentials
       const {email, password} = req.body;
-      if(!email || !password) {return next(new Error(`Missing credentials`))}
-      
+      let validData;
+      try{
+        validData = userLoginZodSchema.parse({
+          email,
+          password
+        })
+      }catch(e) {
+        return next(e)
+      }
       // 2) Find user in database
       const user = await prisma.user.findUnique({
         where:{
-          email:email
+          email:validData.email
         }
       })
       // If user didn't found return error
@@ -90,7 +97,6 @@ export const signIn = async(req,res,next) =>{
       if(!match){
         return next(new Error(`Invalid credentials`))
       }
-      
       
       let token;
       try{
