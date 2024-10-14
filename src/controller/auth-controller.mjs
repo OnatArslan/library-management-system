@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
 import {signJwt} from "../utils/sendJwt.mjs";
+import AppError from '../utils/AppError.mjs';
 import {
   StatusCodes
 } from 'http-status-codes';
@@ -126,14 +127,14 @@ export const authenticate = async(req,res,next) =>{
   try {
 // 1. Extract the token from the request cookies.
     const token = req.cookies.token
-    if(!token) return next(new Error(`Token is missing!!`))
+    if(!token) return next(new AppError(`Token is missing!!`, StatusCodes.UNAUTHORIZED));
     
     // 2. Verify the JWT token.
     let decoded
     try{
       decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     }catch(e) {
-      return next(new Error(`Token is invalid or has expired`));
+      return next(new AppError(`Token is invalid or has expired`, StatusCodes.UNAUTHORIZED));
     }
     
     // 3. Find user with given decoded id
@@ -144,13 +145,13 @@ export const authenticate = async(req,res,next) =>{
       }
     })
     if(!user){
-      return next(new Error(`A user belongs to this token has deleted...`))
+      return next(new AppError(`A user belongs to this token has deleted...`, StatusCodes.UNAUTHORIZED))
     }
     // Check if user has password changed at field
     if(user.passwordChangedAt){
       // Check if password changed after token is created +10000 for when register times will be the same
       if (user.passwordChangedAt.getTime() > decoded.iat * 1000 + 10000) {
-        return next(new Error(`Password changed after token creation. Please login again!`));
+        return next(new AppError(`Password changed after token creation. Please login again!`,StatusCodes.UNAUTHORIZED));
       }
     }
     

@@ -54,7 +54,6 @@ app.use(`*`,
     })
 
 // Error handling middleware
-
 const globalErrorHandler = (err, req, res, next) =>{
   // Log the error for debugging purposes
   console.error(err);
@@ -69,6 +68,8 @@ res.status(statusCode).json({
   stack: process.env.NODE_ENV === "development" ? err.stack : undefined
 })
 }
+
+app.use(globalErrorHandler);
 
 export default app;
 
