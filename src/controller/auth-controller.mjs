@@ -111,8 +111,6 @@ export const signIn = async(req,res,next) =>{
       res.status(200).json({
         status: `success`,
         message: `${user.username} logged in successfully`,
-        token: token,
-        
       })
     }catch(e) {
         next(e)
@@ -160,6 +158,23 @@ export const authenticate = async(req,res,next) =>{
   }
 }
 
+
+export const logOut = async(req,res,next) =>{
+  try {
+    if(req.cookies.token){
+      // Clear token with clearCookie function
+      res.clearCookie("token")
+      res.status(200).json({
+        status:`success`,
+        message:`Logged out successfully`,
+      })
+    }else{
+      return next(new Error(`Already logged out!`))
+    }
+  }catch(e) {
+    next(e)
+  }
+}
 
 export const getAllUsers = async(req,res,next) =>{
     try {
