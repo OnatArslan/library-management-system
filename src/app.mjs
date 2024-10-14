@@ -6,6 +6,7 @@ import helmet from "helmet";
 import compression from "compression";
 import expressSession from "express-session";
 import {rateLimit} from "express-rate-limit";
+import AppError from "./utils/AppError.mjs";
 
 // IMPORT ROUTERS
 import authRouter from "./router/auth-router.mjs";
@@ -54,15 +55,20 @@ app.use(`*`,
 
 // Error handling middleware
 
-// noinspection JSCheckFunctionSignatures
-app.use((err, req, res) => {
-    
-    console.error(err.stack);
-    res.status(500).json({
-        status: 'error',
-        message: err.stack,
-    });
-});
+const globalErrorHandler = (err, req, res, next) =>{
+  // Log the error for debugging purposes
+  console.error(err);
+  
+  // Set status code 500 if not provided
+  const statusCode = err.statusCode || 500;
+  
+// Send response
+res.status(statusCode).json({
+  status: "error",
+  message: err.message || "An unexpected error occurred",
+  stack: process.env.NODE_ENV === "development" ? err.stack : undefined
+})
+}
 
 export default app;
 
