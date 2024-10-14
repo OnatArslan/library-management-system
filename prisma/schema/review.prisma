@@ -1,11 +1,11 @@
 model Review {
-  id    String  @id @default(cuid())
-  title String
-  text  String? @db.Text
-  score Int
-
+  id         String  @id @default(cuid())
+  title      String
+  text       String? @db.Text
+  score      Int
+  // Releationships
   reviewerId String
-  reviewer   User   @relation(fields: [reviewerId], references: [id])
+  reviewer   User    @relation(fields: [reviewerId], references: [id])
 
   bookId      String
   relatedBook Book   @relation(fields: [bookId], references: [id])
