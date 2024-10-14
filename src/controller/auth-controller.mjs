@@ -1,7 +1,9 @@
 import prisma from "../database/prisma.mjs";
 import {userRegisterZodSchema} from "../validator/user-zod.mjs";
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+import {hashPassword} from "../utils/hashPassword.mjs";
+import bcrypt from "bcrypt";
+import {signJwt} from "../utils/sendJwt.mjs";
 
 export const signUp = async(req,res,next) =>{
     try {
@@ -24,7 +26,7 @@ export const signUp = async(req,res,next) =>{
         // Hash password
         let hashedPassword
         try{
-        hashedPassword = await bcrypt.hash(validData.password, 10);
+        hashedPassword = await hashPassword(validData.password, 10)
         }catch(e) {
             return next(e)
         }
@@ -47,9 +49,7 @@ export const signUp = async(req,res,next) =>{
         // Create jwt token
         let token;
         try {
-        token = jwt.sign({id:newUser.id}, process.env.JWT_SECRET_KEY,{
-            expiresIn: "2 days",
-        })
+          token = signJwt(newUser.id);
         }catch(e) {
             return next(e)
         }
@@ -94,9 +94,7 @@ export const signIn = async(req,res,next) =>{
       
       let token;
       try{
-      token = jwt.sign({id:user.id},process.env.JWT_SECRET_KEY,{
-        expiresIn: "2 days"
-      } )
+      token = signJwt(user.id)
       }catch(e) {
         return next(e)
       }
