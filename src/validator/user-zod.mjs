@@ -24,3 +24,23 @@ export const userZodSchema = z.object({
     path:["confirmPassword"]
 });
 
+
+export const userRegisterZodSchema = z.object({
+  email: z.string().email({
+    message: "Invalid email format. Please enter a valid email."
+  }),
+  username: z.string().min(4, {
+    message: "Username is required and must be at least 4 characters long.",
+  }),
+  password: z.string().min(8, {
+    message: "Password is required and must be at least 8 characters long."
+  }),
+  confirmPassword: z.string({
+    message: "Confirm password is required."
+  }),
+}).refine((user) =>{
+  return user.password === user.confirmPassword;
+},{
+  message:"Password do not match",
+  path:["confirmPassword"]
+})

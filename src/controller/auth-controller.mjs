@@ -1,25 +1,26 @@
 import prisma from "../database/prisma.mjs";
-import {userZodSchema} from "../validator/user-zod.mjs";
+import {userRegisterZodSchema} from "../validator/user-zod.mjs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
 export const signUp = async(req,res,next) =>{
     try {
         let validData
-        let {email, password, confirmPassword,username} = req.body;
+        let {email,username, password, confirmPassword} = req.body;
         /* Check data is valid */
         try{
-            validData = userZodSchema.parse({
+            validData = userRegisterZodSchema.parse({
               email:email,
               username: username,
               password: password,
               confirmPassword: confirmPassword,
-              role:"USER"
             });
         }catch(e){
             return next(e)
         }
+        // Deleting confirm password field because prisma user schema does not have
         delete validData.confirmPassword;
+        
         // Hash password
         let hashedPassword
         try{
@@ -34,6 +35,7 @@ export const signUp = async(req,res,next) =>{
                 data:{
                     ...validData,
                     password: hashedPassword,
+                    role:"USER"
                 },
                 omit:{
                     password:true
