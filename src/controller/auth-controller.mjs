@@ -1,5 +1,5 @@
 import prisma from "../database/prisma.mjs";
-import userZod from "../validator/user-zod.mjs";
+import {userZodSchema} from "../validator/user-zod.mjs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 
@@ -9,7 +9,7 @@ export const signUp = async(req,res,next) =>{
         let {email, password, confirmPassword,username} = req.body;
         /* Check data is valid */
         try{
-            validData = userZod.parse({
+            validData = userZodSchema.parse({
               email:email,
               username: username,
               password: password,
@@ -138,11 +138,14 @@ export const authenticate = async(req,res,next) =>{
     if(!user){
       return next(new Error(`A user belongs to this token has deleted...`))
     }
-    
-    // Check if password changed after token is created +10000 for when register times will be the same
-    if (user.passwordChangedAt.getTime() > decoded.iat * 1000 + 10000) {
-      return next(new Error(`Password changed after token creation. Please login again!`));
+    // Check if user has password changed at field
+    if(user.passwordChangedAt){
+      // Check if password changed after token is created +10000 for when register times will be the same
+      if (user.passwordChangedAt.getTime() > decoded.iat * 1000 + 10000) {
+        return next(new Error(`Password changed after token creation. Please login again!`));
+      }
     }
+    
     // If all is done, call next middleware for accessing routes
     req.user = user;
     next();

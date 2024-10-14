@@ -1,19 +1,20 @@
 import {z} from "zod";
 
-const userZodSchema = z.object({
+export const userZodSchema = z.object({
     email: z.string().email({
         message: "Invalid email format. Please enter a valid email."
     }),
     username: z.string().min(4, {
-        message: "Username is required and cannot be empty."
+        message: "Username is required and must be at least 4 characters long.",
     }),
     bio: z.string().optional(), // No message since it's optional
     password: z.string().min(8, {
-        message: "Password must be at least 8 characters long."
+        message: "Password is required and must be at least 8 characters long."
     }),
     confirmPassword: z.string({
         message: "Confirm password is required."
     }),
+    createdDate:z.date().optional(),
     role:z.enum(["ADMIN","USER"]).default("USER")
      // Optional but should still be a valid date if provided
 }).refine((user) =>{
@@ -23,4 +24,3 @@ const userZodSchema = z.object({
     path:["confirmPassword"]
 });
 
-export default userZodSchema;

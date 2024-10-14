@@ -4,10 +4,10 @@ model UserFollow {
 
   // RELEATION FIELDS
   followerId String
-  follower   User   @relation("follower", fields: [followerId], references: [id])
+  follower   User   @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
 
   followingId String
-  following   User   @relation("following", fields: [followingId], references: [id])
+  following   User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
 
   @@id([followingId, followerId])
   @@map("user_follow")
@@ -17,4 +17,6 @@ enum Status {
   PENDING
   ACCEPTED
   DECLINED
+  // If status is blocked user can not send more follow request to this user
+  BLOCKED
 }

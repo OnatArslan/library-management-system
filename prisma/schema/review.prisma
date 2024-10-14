@@ -5,10 +5,10 @@ model Review {
   score      Int
   // Releationships
   reviewerId String
-  reviewer   User    @relation(fields: [reviewerId], references: [id])
+  reviewer   User    @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
 
   bookId      String
-  relatedBook Book   @relation(fields: [bookId], references: [id])
+  relatedBook Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
   @@map("review")
 }

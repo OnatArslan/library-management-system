@@ -1,8 +1,8 @@
 model UserLikedBooks {
   userId String
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookId String
-  book   Book   @relation(fields: [bookId], references: [id])
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
   // Ensure that a user can like a book only once
   @@id([userId, bookId])
