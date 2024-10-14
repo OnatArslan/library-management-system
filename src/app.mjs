@@ -6,7 +6,7 @@ import helmet from "helmet";
 import compression from "compression";
 import expressSession from "express-session";
 import {rateLimit} from "express-rate-limit";
-import AppError from "./utils/AppError.mjs";
+
 
 // IMPORT ROUTERS
 import authRouter from "./router/auth-router.mjs";
@@ -54,7 +54,7 @@ app.use(`*`,
     })
 
 // Error handling middleware
-const globalErrorHandler = (err, req, res, next) =>{
+const globalErrorHandler = (err, req, res) =>{
   // Log the error for debugging purposes
   console.error(err);
   
