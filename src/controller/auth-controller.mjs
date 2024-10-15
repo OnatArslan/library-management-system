@@ -193,16 +193,34 @@ export const logOut = async(req,res,next) =>{
 }
 
 export const forgotPassword = async(req,res,next) =>{
-  try{
+  try {
+    // 1) Get email from request body
     const {email} = req.body;
+    
+    // 2) Check given email is valid
     let validData;
-    try{
+    try {
       validData = userEmailZodSchema.parse({
         email
       });
-    }catch (e) {
+    } catch (e) {
       return next(e);
     }
+    
+    //  3) Find user with given email
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email
+      },
+      omit: {
+        password: true
+      }
+    })
+    // If user is not found return an error
+    if (!user) {
+      return next(new AppError("Invalid credentials!",StatusCodes.NOT_FOUND))
+    }
+    
     
     
   }catch (e) {
