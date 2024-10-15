@@ -11,6 +11,7 @@ import {rateLimit} from "express-rate-limit";
 // IMPORT ROUTERS
 import authRouter from "./router/auth-router.mjs";
 import bookRouter from "./router/book-router.mjs";
+import userRouter from './router/user-router.mjs';
 
 let app = express();
 
@@ -43,6 +44,7 @@ app.use(rateLimit({
 // USING ROUTERS----------------------------------------------------------
 app.use(`/api/v1/auth`,authRouter)
 app.use(`/api/v1/book`,bookRouter)
+app.use(`/api/v1/user`,userRouter)
 
 
 app.use(`*`,
@@ -54,7 +56,13 @@ app.use(`*`,
     })
 
 // Error handling middleware
-const globalErrorHandler = (err, req, res) =>{
+/**
+ * @param {*} err
+ * @param {*} req
+ * @param {NextFunction|Response<*, Record<string, *>>} res
+ * @param {NextFunction} next
+ */
+const globalErrorHandler = (err, req, res, next) =>{
   // Log the error for debugging purposes
   console.error(err);
   

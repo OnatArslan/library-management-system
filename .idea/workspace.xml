@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/router/user-router.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/auth-controller.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/auth-controller.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/auth-router.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/auth-router.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +53,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "editor.preferences.completion",
     "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   },
@@ -103,7 +106,7 @@
       <workItem from="1728471027188" duration="2882000" />
       <workItem from="1728614064249" duration="5010000" />
       <workItem from="1728628272757" duration="6537000" />
-      <workItem from="1728944564303" duration="5667000" />
+      <workItem from="1728944564303" duration="6424000" />
     </task>
     <servers />
   </component>

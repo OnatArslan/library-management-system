@@ -181,17 +181,4 @@ export const logOut = async(req,res,next) =>{
   }
 }
 
-export const getAllUsers = async(req,res,next) =>{
-    try {
-      const users = await prisma.user.findMany();
-      console.log(req.user);
-      res.status(200).json({
-        status:`success`,
-        data:{
-          users
-        }
-        })
-    }catch(e) {
-        next(e)
-    }
-}
+
