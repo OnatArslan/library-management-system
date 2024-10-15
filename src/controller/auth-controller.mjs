@@ -5,6 +5,8 @@ import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
 import {signJwt} from "../utils/sendJwt.mjs";
 import AppError from '../utils/AppError.mjs';
+import transport from '../utils/mailer.mjs';
+
 import {
   StatusCodes
 } from 'http-status-codes';
@@ -218,8 +220,55 @@ export const forgotPassword = async(req,res,next) =>{
     })
     // If user is not found return an error
     if (!user) {
-      return next(new AppError("Invalid credentials!",StatusCodes.NOT_FOUND))
+      return next(new AppError('Invalid credentials!', StatusCodes.NOT_FOUND))
     }
+    
+    // 4) Create a reset token
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    
+    // 5) Hash the reset token
+    const hashedResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    
+    // 6) Save the hashed reset token and set expiration time
+    await prisma.user.update({
+      where: { email: email },
+      data: {
+        passwordResetToken: hashedResetToken,
+        passwordResetExpires: new Date(Date.now() + 10 * 60 * 1000) // 10 minutes from now
+      }
+    });
+
+// 7) Send the reset token to the user's email
+    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+    
+    const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
+    
+    try {
+      await transport.sendMail({
+        from: 'no-reply@example.com',
+        to: user.email,
+        subject: 'Your password reset token (valid for 10 minutes)',
+        text: message
+      });
+      
+      res.status(StatusCodes.OK).json({
+        status: 'success',
+        message: 'Token sent to email!'
+      });
+    } catch (err) {
+      user.passwordResetToken = undefined;
+      user.passwordResetExpires = undefined;
+      await prisma.user.update({
+        where: { email: email },
+        data: {
+          passwordResetToken: null,
+          passwordResetExpires: null
+        }
+      });
+      
+      return next(new AppError('There was an error sending the email. Try again later!', StatusCodes.INTERNAL_SERVER_ERROR));
+    }
+    
     
     
     
