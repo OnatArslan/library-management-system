@@ -61,18 +61,6 @@ export const createAdmin = async(req,res,next) =>{
       return next(e)
     }
     
-    let token;
-    try{
-    token = signJwt(newAdmin.id)
-    }catch (e) {
-      next(e)
-    }
-    
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: true,
-    });
-    
     res.status(StatusCodes.CREATED).json({
       status:`success`,
       data:{
