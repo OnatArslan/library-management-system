@@ -376,3 +376,23 @@ export const resetPassword = async(req,res,next) =>{
     next(e)
   }
 }
+
+
+// Remove from here and add to profile controller
+export const getMe = async(req,res,next) =>{
+  try {
+    const me = await prisma.user.findUnique({
+      where:{
+        id:req.user.id
+      }
+    })
+    res.status(200).json({
+      status:`success`,
+      data:{
+        me
+      }
+    })
+  }catch (e) {
+    next(e)
+  }
+}
