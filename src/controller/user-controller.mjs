@@ -71,3 +71,4 @@ export const createAdmin = async(req,res,next) =>{
     next(e)
   }
 }
+
