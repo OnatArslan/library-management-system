@@ -3,7 +3,7 @@ import AppError from '../utils/AppError.mjs';
 import {StatusCodes} from 'http-status-codes';
 import {userRegisterZodSchema} from '../validator/user-zod.mjs';
 import {hashPassword} from '../utils/hashPassword.mjs';
-import {signJwt} from '../utils/sendJwt.mjs';
+
 
 
 export const getAllUsers = async (req,res,next) =>{
