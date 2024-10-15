@@ -60,3 +60,17 @@ export const userEmailZodSchema = z.object({
     message:"Invalid email format.Please enter a valid email!"
   })
 })
+
+export const userChangePasswordSchema = z.object({
+  password: z.string().min(8, {
+    message: "Password is required and must be at least 8 characters long."
+  }),
+  confirmPassword: z.string({
+    message: "Confirm password is required."
+  }),
+}).refine(user =>{
+  return user.password === user.confirmPassword
+},{
+  message:"Password do not match",
+  path:["confirmPassword"]
+})

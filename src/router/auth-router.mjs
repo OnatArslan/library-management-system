@@ -1,5 +1,5 @@
 import express from "express";
-import {forgotPassword, logOut, signIn, signUp} from '../controller/auth-controller.mjs';
+import {forgotPassword, logOut, resetPassword, signIn, signUp} from '../controller/auth-controller.mjs';
 
 
 
@@ -10,4 +10,5 @@ router.route(`/sign-in`).post(signIn)
 router.route(`/log-out`).delete(logOut)
 
 router.route(`/forgot-password`).post(forgotPassword)
+router.route(`/reset-password/:resetString`).patch(resetPassword)
 export default router;
