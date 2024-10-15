@@ -10,6 +10,7 @@ import {
 } from 'http-status-codes';
 
 
+
 export const signUp = async(req,res,next) =>{
     try {
         let validData
@@ -160,6 +161,19 @@ export const authenticate = async(req,res,next) =>{
     next();
   }catch(e) {
     next(e)
+  }
+}
+
+export const restrict = (roles) =>{
+  return async(req,res,next) =>{
+    try{
+      if(!roles.includes(req.user.role)){
+        return next(new AppError("Only admins can access this route",StatusCodes.UNAUTHORIZED))
+      }
+      next()
+    }catch (e) {
+      next(e)
+    }
   }
 }
 
