@@ -73,7 +73,7 @@ export const createAdmin = async(req,res,next) =>{
       secure: true,
     });
     
-    res.status(StatusCodes.OK).json({
+    res.status(StatusCodes.CREATED).json({
       status:`success`,
       data:{
         admin:newAdmin
@@ -85,3 +85,25 @@ export const createAdmin = async(req,res,next) =>{
   }
 }
 
+export const getUser = async (req,res,next) =>{
+  try{
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.params.userId
+      },
+      omit:{
+        password:true,
+        passwordChangedAt:true
+      }
+    });
+    if(!user){
+      return next(new AppError("Can not find any user with given ID",StatusCodes.NOT_FOUND))
+    }
+    res.status(StatusCodes.OK).json({
+      status:`success`,
+      user
+    })
+  }catch (e) {
+    next(e)
+  }
+}
