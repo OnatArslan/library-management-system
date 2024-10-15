@@ -74,7 +74,6 @@ export const signUp = async(req,res,next) =>{
     }
 }
 
-
 export const signIn = async(req,res,next) =>{
     try {
       // 1) Get user credentials
@@ -122,7 +121,6 @@ export const signIn = async(req,res,next) =>{
         next(e)
     }
 }
-
 
 export const authenticate = async(req,res,next) =>{
   try {
@@ -176,7 +174,6 @@ export const restrict = (roles) =>{
     }
   }
 }
-
 
 export const logOut = async(req,res,next) =>{
   try {
