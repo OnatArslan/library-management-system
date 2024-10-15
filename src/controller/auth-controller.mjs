@@ -1,5 +1,11 @@
 import prisma from "../database/prisma.mjs";
-import {userEmailZodSchema, userLoginZodSchema, userRegisterZodSchema, userZodSchema} from '../validator/user-zod.mjs';
+import {
+  userChangePasswordSchema,
+  userEmailZodSchema,
+  userLoginZodSchema,
+  userRegisterZodSchema,
+  userZodSchema
+} from '../validator/user-zod.mjs';
 import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
@@ -287,9 +293,25 @@ export const forgotPassword = async(req,res,next) =>{
 
 export const resetPassword = async(req,res,next) =>{
   try {
-    const {resetString} = req.body;
+    // Get data from request obj
+    const {resetString} = req.params;
+    const {password, confirmPassword} = req.body;
+    
     // Hash the `resetToken` to match the stored hashed token.
     const hashedToken = crypto.createHash('sha256').update(resetString).digest('hex');
+    
+    // Validate the new password and confirm password from the request body.
+    let validData;
+    try {
+      validData = userChangePasswordSchema.parse({
+        password,
+        confirmPassword
+      })
+    }catch (e) {
+      return next(e);
+    }
+    
+    
     // Find the user with the hashed reset token and check if the token has not expired.
     try {
     
@@ -297,7 +319,6 @@ export const resetPassword = async(req,res,next) =>{
       next(e);
     }
     // If the user is not found or the token has expired, return an error.
-    // Validate the new password and confirm password from the request body.
     // Hash the new password.
     // Update the user's password in the database and clear the reset token and expiration time.
     // Optionally, update the `passwordChangedAt` field to the current time.
