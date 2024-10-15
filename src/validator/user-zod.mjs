@@ -53,3 +53,10 @@ export const userLoginZodSchema = z.object({
     message:"Password is required and must be at least 8 characters long."
   })
 })
+
+
+export const userEmailZodSchema = z.object({
+  email:z.string().email({
+    message:"Invalid email format.Please enter a valid email!"
+  })
+})

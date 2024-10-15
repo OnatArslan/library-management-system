@@ -1,5 +1,5 @@
 import prisma from "../database/prisma.mjs";
-import {userLoginZodSchema, userRegisterZodSchema, userZodSchema} from "../validator/user-zod.mjs";
+import {userEmailZodSchema, userLoginZodSchema, userRegisterZodSchema, userZodSchema} from '../validator/user-zod.mjs';
 import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
 import bcrypt from "bcrypt";
@@ -192,4 +192,20 @@ export const logOut = async(req,res,next) =>{
   }
 }
 
-
+export const forgotPassword = async(req,res,next) =>{
+  try{
+    const {email} = req.body;
+    let validData;
+    try{
+      validData = userEmailZodSchema.parse({
+        email
+      });
+    }catch (e) {
+      return next(e);
+    }
+    
+    
+  }catch (e) {
+    next(e)
+  }
+}
