@@ -3,6 +3,7 @@ import AppError from '../utils/AppError.mjs';
 import {StatusCodes} from 'http-status-codes';
 import {userRegisterZodSchema} from '../validator/user-zod.mjs';
 import {hashPassword} from '../utils/hashPassword.mjs';
+import {signJwt} from '../utils/sendJwt.mjs';
 
 
 export const getAllUsers = async (req,res,next) =>{
@@ -59,6 +60,18 @@ export const createAdmin = async(req,res,next) =>{
     }catch (e) {
       return next(e)
     }
+    
+    let token;
+    try{
+    token = signJwt(newAdmin.id)
+    }catch (e) {
+      next(e)
+    }
+    
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+    });
     
     res.status(StatusCodes.OK).json({
       status:`success`,
