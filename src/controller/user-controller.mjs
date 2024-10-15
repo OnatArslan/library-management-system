@@ -11,7 +11,7 @@ export const getAllUsers = async (req,res,next) =>{
     const users = await prisma.user.findMany({
       omit:{
         password:true,
-        passwordChangedAt:true,
+        passwordChangedAt:false,
       }
     });
     

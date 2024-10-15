@@ -8,7 +8,7 @@ import {
 } from '../validator/user-zod.mjs';
 import jwt from "jsonwebtoken"
 import {hashPassword} from "../utils/hashPassword.mjs";
-import bcrypt from "bcrypt";
+import bcrypt, {hash} from 'bcrypt';
 import {signJwt} from "../utils/sendJwt.mjs";
 import AppError from '../utils/AppError.mjs';
 import  crypto from 'node:crypto';
@@ -298,7 +298,7 @@ export const resetPassword = async(req,res,next) =>{
     const {password, confirmPassword} = req.body;
     
     // Hash the `resetToken` to match the stored hashed token.
-    const hashedToken = crypto.createHash('sha256').update(resetString).digest('hex');
+    const hashedString = crypto.createHash('sha256').update(resetString).digest('hex');
     
     // Validate the new password and confirm password from the request body.
     let validData;
@@ -307,24 +307,70 @@ export const resetPassword = async(req,res,next) =>{
         password,
         confirmPassword
       })
-    }catch (e) {
+    } catch (e) {
       return next(e);
     }
     
-    
-    // Find the user with the hashed reset token and check if the token has not expired.
-    try {
-    
-    }catch (e) {
-      next(e);
-    }
+    // Find and update the user with the hashed reset token and check if the token has not expired.
     // If the user is not found or the token has expired, return an error.
+    const user = await prisma.user.findFirst({
+      where: {
+        passwordResetString: hashedString,
+        passwordResetExpiresIn: {
+          gte: new Date()
+        }
+      }
+    })
+    if (!user) {
+      return next(new AppError('Password reset string is invalid or has expired'))
+    }
+    
     // Hash the new password.
+    let hashedPassword;
+    try {
+      hashedPassword = await hashPassword(password, 10)
+    } catch (e) {
+      next(e)
+    }
+    
     // Update the user's password in the database and clear the reset token and expiration time.
     // Optionally, update the `passwordChangedAt` field to the current time.
+    let updatedUser
+    try {
+      updatedUser = await prisma.user.update({
+        where: {
+          username: user.username
+        },
+        data: {
+          password: hashedPassword,
+          passwordResetString: null,
+          passwordResetExpiresIn: null,
+          passwordChangedAt: new Date()
+        }
+      })
+    } catch (e) {
+      return next(e);
+    }
+    
     // Generate a new JWT token for the user.
+    let token
+    try {
+      token = signJwt(updatedUser.id);
+    } catch (e) {
+      next(e);
+    }
+    
     // Send the new token in a cookie.
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: true,
+    });
+    
     // Respond with a success message.
+    res.status(200).json({
+      status: `success`,
+      message: `Password changed successfully`
+    })
     
   }catch (e) {
     next(e)

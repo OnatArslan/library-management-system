@@ -7,6 +7,7 @@
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/auth-controller.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/auth-controller.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/user-controller.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/user-controller.mjs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +104,7 @@
       <workItem from="1728471027188" duration="2882000" />
       <workItem from="1728614064249" duration="5010000" />
       <workItem from="1728628272757" duration="6537000" />
-      <workItem from="1728944564303" duration="12909000" />
+      <workItem from="1728944564303" duration="14347000" />
     </task>
     <servers />
   </component>
