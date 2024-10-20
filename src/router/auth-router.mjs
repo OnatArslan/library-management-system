@@ -20,6 +20,7 @@ router.route(`/forgot-password`).post(forgotPassword)
 router.route(`/reset-password/:resetString`).patch(resetPassword)
 
 // Commit here
+// Commit here
 
 router.route(`/get-me`).get(authenticate,getMe)
 
