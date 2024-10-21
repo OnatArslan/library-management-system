@@ -19,9 +19,7 @@ router.route(`/log-out`).delete(logOut)
 router.route(`/forgot-password`).post(forgotPassword)
 router.route(`/reset-password/:resetString`).patch(resetPassword)
 
-// Here
-// Here
-// Here
+
 
 
 
