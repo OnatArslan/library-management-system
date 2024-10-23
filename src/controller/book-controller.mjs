@@ -110,9 +110,23 @@ export const getBook = async (req, res, next) => {
          where: {
             id: bookId
          },
-         omit: {
-            currentOwnerId: true
+         omit:{
+            currentOwnerId:true,
+         },
+         include: {
+            currentOwner:{
+               select:{
+                  username: true
+               }
+            },
+            _count:{
+               select:{
+                  reviews:true,
+                  likedByUsers:true
+               }
+            }
          }
+         
       });
       res.status(200).json({
          status: `success`,
