@@ -165,8 +165,6 @@ export const borrowBook = async (req, res, next) => {
       } catch (e) {
          return next(e);
       }
-      
-      
       res.status(StatusCodes.OK).json({
          status: `success`,
          message: 'Book is borrowed successfully.',
