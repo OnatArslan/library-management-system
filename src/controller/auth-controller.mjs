@@ -36,7 +36,7 @@ export const signUp = async(req,res,next) =>{
         }catch(e){
             return next(e)
         }
-        // Deleting confirm password field because prisma user schema does not have
+        // Deleting confirm password field because prisma user schema does not include confirmPassword field
         delete validData.confirmPassword;
         
         // Hash password
