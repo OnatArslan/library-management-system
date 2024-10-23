@@ -1,6 +1,5 @@
 import bookZod from '../validator/book-zod.mjs';
 import prisma from '../database/prisma.mjs';
-import AppError from '../utils/AppError.mjs';
 import {StatusCodes} from 'http-status-codes';
 
 
@@ -158,21 +157,23 @@ export const borrowBook = async (req, res, next) => {
                id: bookId,
                isBooked: false
             },
-            data:{
+            data: {
                isBooked: true,
-               currentOwnerId: req.user.id,
+               currentOwnerId: req.user.id
             }
          })
-      }catch (e) {
+      } catch (e) {
          return next(e);
       }
       
       
-      
       res.status(StatusCodes.OK).json({
-         status:`success`,
-         message:""
-      })
+         status: `success`,
+         message: 'Book is borrowed successfully.',
+         data: {
+            book
+         }
+      });
    } catch (e) {
       next(e)
    }
