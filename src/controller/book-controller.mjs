@@ -48,14 +48,13 @@ export const bulkCreateBooks = async (req, res, next) => {
          bookData.publishedAt = new Date(bookData.publishedAt);
       })
       
-      req.body.forEach(datedBookData =>{
+      req.body.forEach(datedBookData => {
          try {
             let validBookData = bookZod.parse({
                ...datedBookData
             });
             validBooksData.push(validBookData);
-         }
-         catch (e) {
+         } catch (e) {
             return next(e)
          }
       })
@@ -146,10 +145,39 @@ export const deleteBook = async (req, res, next) => {
    }
 }
 
-export const borrowBook = async (req,res,next) =>{
+export const borrowBook = async (req, res, next) => {
+   try {
+      const bookId = req.params.bookId;
+      let book;
+      try {
+         book = await prisma.book.findUnique({
+            where:{
+               id:bookId,
+               isBooked:false,
+               
+            }
+         })
+      }catch (e) {
+         return next(e);
+      }
+   } catch (e) {
+      next(e)
+   }
+}
+
+export const addToLikedBooks = async (req, res, next) => {
    try {
    
-   }catch (e) {
-      next(e)
+   } catch (e) {
+      next(e);
+   }
+}
+
+
+export const returnBook = async (req, res, next) => {
+   try {
+   
+   } catch (e) {
+      next(e);
    }
 }
