@@ -1,6 +1,7 @@
 import bookZod from '../validator/book-zod.mjs';
 import prisma from '../database/prisma.mjs';
 import {StatusCodes} from 'http-status-codes';
+import AppError from '../utils/AppError.mjs';
 
 
 export const createBook = async (req, res, next) => {
@@ -149,6 +150,25 @@ export const deleteBook = async (req, res, next) => {
 export const borrowBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
+      const user = await prisma.user.findUnique({
+         where:{
+            id:req.user.id,
+         },
+         omit:{
+            password:true,
+         },
+         include:{
+            _count:{
+               select:{
+                  currentBooks:true
+               }
+            }
+         }
+      })
+      if(user._count.currentBooks >= 2 || !user){
+         return next(new AppError("Reached maximum borrow limit.Please return borrowed books to borrow new book!!!"),StatusCodes.NOT_FOUND)
+      }
+      
       // Try to find and update a book with given ID
       let book;
       try {
@@ -159,7 +179,7 @@ export const borrowBook = async (req, res, next) => {
             },
             data: {
                isBooked: true,
-               currentOwnerId: req.user.id
+               currentOwnerId: user.id
             }
          })
       } catch (e) {
@@ -169,7 +189,8 @@ export const borrowBook = async (req, res, next) => {
          status: `success`,
          message: 'Book is borrowed successfully.',
          data: {
-            book
+            book,
+            user
          }
       });
    } catch (e) {
