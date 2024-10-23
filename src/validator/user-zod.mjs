@@ -20,7 +20,7 @@ export const userZodSchema = z.object({
 }).refine((user) =>{
     return user.password === user.confirmPassword;
 },{
-    message:"Password do not match",
+    message:"Passwords does not match",
     path:["confirmPassword"]
 });
 
