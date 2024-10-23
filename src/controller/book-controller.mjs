@@ -150,18 +150,30 @@ export const deleteBook = async (req, res, next) => {
 export const borrowBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
-      // Try to find a book with given ID
-      const book = await prisma.book.findUnique({
-         where: {
-            id: bookId,
-            isBooked: false
-            
-         }
-      })
-      // If the book is missing, return an error
-      if(!book){
-         return next(new AppError('Can not find any book with given ID', StatusCodes.NOT_FOUND));
+      // Try to find and update a book with given ID
+      let book;
+      try {
+         book = await prisma.book.update({
+            where: {
+               id: bookId,
+               isBooked: false
+            },
+            data:{
+               isBooked: true,
+               currentOwnerId: req.user.id,
+               
+            }
+         })
+      }catch (e) {
+         return next(e);
       }
+      
+      
+      
+      res.status(StatusCodes.OK).json({
+         status:`success`,
+         message:""
+      })
    } catch (e) {
       next(e)
    }

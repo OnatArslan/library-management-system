@@ -50,7 +50,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.2.3\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -109,7 +109,8 @@
       <workItem from="1729362808426" duration="63000" />
       <workItem from="1729456556165" duration="44000" />
       <workItem from="1729472382097" duration="628000" />
-      <workItem from="1729651825412" duration="2512000" />
+      <workItem from="1729651825412" duration="2724000" />
+      <workItem from="1729654618622" duration="6000" />
     </task>
     <servers />
   </component>
