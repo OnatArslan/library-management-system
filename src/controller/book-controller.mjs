@@ -145,3 +145,11 @@ export const deleteBook = async (req, res, next) => {
       next(e)
    }
 }
+
+export const borrowBook = async (req,res,next) =>{
+   try {
+   
+   }catch (e) {
+      next(e)
+   }
+}
