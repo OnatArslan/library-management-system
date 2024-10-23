@@ -161,7 +161,6 @@ export const borrowBook = async (req, res, next) => {
             data:{
                isBooked: true,
                currentOwnerId: req.user.id,
-               
             }
          })
       }catch (e) {
