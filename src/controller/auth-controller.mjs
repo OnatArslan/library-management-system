@@ -376,15 +376,31 @@ export const resetPassword = async (req, res, next) => {
 // Remove from here and add to profile controller
 export const getMe = async (req, res, next) => {
    try {
-      const me = await prisma.user.findUnique({
+      const user = await prisma.user.findUnique({
          where: {
             id: req.user.id
+         },
+         omit:{
+            password:true,
+            passwordChangedAt:true,
+            passwordResetExpiresIn:true,
+            role:true
+         },
+         include:{
+            currentBooks:{
+               select:{
+                  title:true
+               }
+            }
          }
       })
+      if(!user){
+         return next(new Error(`Something went wrong, please try again later`))
+      }
       res.status(200).json({
          status: `success`,
          data: {
-            me
+            user
          }
       })
    } catch (e) {
