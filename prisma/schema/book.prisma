@@ -16,8 +16,8 @@ model Book {
   likedByUsers   UserLikedBooks[]
   // 3) For users book this book before
   oldBookedBy    UserPastBookings[]
-
-  reviews Review[]
+  // 4) Review relations
+  reviews        Review[]
 
   @@index(title)
   @@map("book")
