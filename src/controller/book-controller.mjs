@@ -1,5 +1,7 @@
 import bookZod from '../validator/book-zod.mjs';
 import prisma from '../database/prisma.mjs';
+import AppError from '../utils/AppError.mjs';
+import {StatusCodes} from 'http-status-codes';
 
 
 export const createBook = async (req, res, next) => {
@@ -148,17 +150,17 @@ export const deleteBook = async (req, res, next) => {
 export const borrowBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
-      let book;
-      try {
-         book = await prisma.book.findUnique({
-            where:{
-               id:bookId,
-               isBooked:false,
-               
-            }
-         })
-      }catch (e) {
-         return next(e);
+      // Try to find a book with given ID
+      const book = await prisma.book.findUnique({
+         where: {
+            id: bookId,
+            isBooked: false
+            
+         }
+      })
+      // If the book is missing, return an error
+      if(!book){
+         return next(new AppError('Can not find any book with given ID', StatusCodes.NOT_FOUND));
       }
    } catch (e) {
       next(e)
