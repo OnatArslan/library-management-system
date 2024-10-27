@@ -405,10 +405,11 @@ export const getMe = async (req, res, next) => {
             },
             oldBookings: {
                select: {
+                  returnDate:true,
                   book: {
                      select: {
                         title: true,
-                        id: true
+                        id: true,
                      }
                   }
                }

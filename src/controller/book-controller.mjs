@@ -283,8 +283,9 @@ export const removeFromLikedBooks = async (req, res, next) => {
 export const returnBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
+      let oldBook
       try {
-          await prisma.book.update({
+          oldBook = await prisma.book.update({
             where: {
                id: bookId,
                currentOwnerId: req.user.id
