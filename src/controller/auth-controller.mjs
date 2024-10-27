@@ -380,37 +380,37 @@ export const getMe = async (req, res, next) => {
          where: {
             id: req.user.id
          },
-         omit:{
-            password:true,
-            passwordChangedAt:true,
-            passwordResetExpiresIn:true,
-            role:true
+         omit: {
+            password: true,
+            passwordChangedAt: true,
+            passwordResetExpiresIn: true,
+            role: true
          },
-         include:{
-            currentBooks:{
-               select:{
-                  title:true,
-                  id:true
+         include: {
+            currentBooks: {
+               select: {
+                  title: true,
+                  id: true
                }
             },
-            likedBooks:{
-               select:{
-                  book:{
-                     select:{
-                        title:true,
-                        id:true
+            likedBooks: {
+               select: {
+                  book: {
+                     select: {
+                        title: true,
+                        id: true
                      }
                   }
                }
             },
-            oldBookings:{
-               select:{
-               book:{
-                  select:{
-                     title:true,
-                     id:true
+            oldBookings: {
+               select: {
+                  book: {
+                     select: {
+                        title: true,
+                        id: true
+                     }
                   }
-               }
                }
             }
          }
