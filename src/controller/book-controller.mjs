@@ -4,6 +4,7 @@ import {StatusCodes} from 'http-status-codes';
 import AppError from '../utils/AppError.mjs';
 
 
+// CRUD BOOK
 export const createBook = async (req, res, next) => {
    try {
       //     Test if data is valid
@@ -162,6 +163,8 @@ export const deleteBook = async (req, res, next) => {
    }
 }
 
+
+// BORROW RETURN LIKE USER STUFF
 export const borrowBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
@@ -180,6 +183,7 @@ export const borrowBook = async (req, res, next) => {
             }
          }
       })
+      // Control book count for current user
       if (user._count.currentBooks >= 2 || !user) {
          return next(new AppError('Reached maximum borrow limit.Please return borrowed books to borrow new book!!!'), StatusCodes.NOT_FOUND)
       }
@@ -194,7 +198,8 @@ export const borrowBook = async (req, res, next) => {
             },
             data: {
                isBooked: true,
-               currentOwnerId: user.id
+               currentOwnerId: user.id,
+               borrowedAt:new Date()
             }
          })
       } catch (e) {
@@ -288,6 +293,7 @@ export const returnBook = async (req, res, next) => {
             data: {
                isBooked: false,
                currentOwnerId: null,
+               borrowedAt:null,
                oldBookedBy: {
                   create: {
                      userId:req.user.id,
@@ -312,3 +318,22 @@ export const returnBook = async (req, res, next) => {
    }
 };
 
+// GET USER RELATED BOOK DATA
+export const getBorrowedBooks = async (req, res, next) => {
+   try {
+      const borrowedBooks = await prisma.book.findMany({
+         where:{
+            isBooked:true,
+            currentOwnerId:req.user.id
+         },
+      })
+      res.status(200).json({
+         status: `success`,
+         data: {
+         borrowedBooks
+         }
+      })
+   } catch (e) {
+      next(e)
+   }
+}

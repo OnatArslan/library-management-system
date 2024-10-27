@@ -5,7 +5,7 @@ import {
    createBook,
    deleteBook,
    getAllBooks,
-   getBook, addToLikedBooks, returnBook
+   getBook, addToLikedBooks, returnBook, removeFromLikedBooks, getBorrowedBooks
 } from '../controller/book-controller.mjs';
 import {authenticate, restrict} from '../controller/auth-controller.mjs';
 
@@ -22,7 +22,10 @@ router.route(`/:bookId/borrow`).patch(authenticate, restrict(['USER']), borrowBo
 
 router.route(`/:bookId/return`).patch(authenticate, restrict(['USER']), returnBook);
 
-router.route(`/:bookId/like`).post(authenticate, restrict(['USER']), addToLikedBooks);
+router.route(`/:bookId/liked`).post(authenticate, restrict(['USER']), addToLikedBooks);
 
+router.route(`/:bookId/liked`).delete(authenticate, restrict(['USER']), removeFromLikedBooks);
+
+router.route(`/borrowed`).get(authenticate, restrict([`USER`]))
 
 export default router;

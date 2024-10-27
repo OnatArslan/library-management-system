@@ -1,23 +1,25 @@
 model Book {
-  id             String             @id @default(cuid())
-  isbn           String             @unique
+  id             String       @id @default(cuid())
+  isbn           String       @unique
   title          String
   authors        String[]
-  category       BookCategory       @default(OTHER)
-  isBooked       Boolean            @default(false)
+  category       BookCategory @default(OTHER)
+  isBooked       Boolean      @default(false)
   publishedAt    DateTime?
-  totalScore     Decimal            @default(0.0) @db.Decimal(10, 2)
-  createdAt      DateTime           @default(now())
+  totalScore     Decimal      @default(0.0) @db.Decimal(10, 2)
+  createdAt      DateTime     @default(now())
   // REFERANCES
   // 1) For booked owner one to many
   currentOwnerId String?
-  currentOwner   User?              @relation(references: [id], fields: [currentOwnerId])
+  currentOwner   User?        @relation(references: [id], fields: [currentOwnerId])
+
+  borrowedAt   DateTime?
   // 2) For users who like the book
-  likedByUsers   UserLikedBooks[]
+  likedByUsers UserLikedBooks[]
   // 3) For users book this book before
-  oldBookedBy    UserPastBookings[]
+  oldBookedBy  UserPastBookings[]
   // 4) Review relations
-  reviews        Review[]
+  reviews      Review[]
 
   @@index(title)
   @@map("book")
