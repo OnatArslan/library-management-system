@@ -199,7 +199,7 @@ export const borrowBook = async (req, res, next) => {
             data: {
                isBooked: true,
                currentOwnerId: user.id,
-               borrowedAt:new Date()
+               borrowedAt: new Date()
             }
          })
       } catch (e) {
@@ -234,18 +234,18 @@ export const addToLikedBooks = async (req, res, next) => {
       let userLikedBook;
       try {
          userLikedBook = await prisma.userLikedBooks.create({
-            data:{
+            data: {
                userId: req.user.id,
-               bookId:book.id
+               bookId: book.id
             }
          })
-      }catch (e) {
+      } catch (e) {
          return next(e);
       }
       
       res.status(StatusCodes.OK).json({
          status: `success`,
-         message:`${book.title} added to your liked books.`,
+         message: `${book.title} added to your liked books.`,
          data: {
             userLikedBook
          }
@@ -255,27 +255,27 @@ export const addToLikedBooks = async (req, res, next) => {
    }
 }
 
-export const removeFromLikedBooks = async (req,res,next) =>{
+export const removeFromLikedBooks = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
       try {
          await prisma.userLikedBooks.delete({
-            where:{
-               userId_bookId:{
-                  userId:req.user.id,
-                  bookId:bookId
+            where: {
+               userId_bookId: {
+                  userId: req.user.id,
+                  bookId: bookId
                }
             }
          })
-      }catch (e) {
+      } catch (e) {
          return next(e);
       }
       // Send response with proper message.
       res.status(204).json({
-         status:`success`,
-         message:`Book removed from your liked book list.`
+         status: `success`,
+         message: `Book removed from your liked book list.`
       })
-   }catch (e) {
+   } catch (e) {
       next(e);
    }
 }
@@ -283,9 +283,8 @@ export const removeFromLikedBooks = async (req,res,next) =>{
 export const returnBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
-      let oldBook;
       try {
-         oldBook = await prisma.book.update({
+          await prisma.book.update({
             where: {
                id: bookId,
                currentOwnerId: req.user.id
@@ -293,13 +292,7 @@ export const returnBook = async (req, res, next) => {
             data: {
                isBooked: false,
                currentOwnerId: null,
-               borrowedAt:null,
-               oldBookedBy: {
-                  create: {
-                     userId:req.user.id,
-                     returnDate: new Date()
-                  }
-               }
+               borrowedAt: null,
             }
          });
       } catch (e) {
@@ -308,7 +301,7 @@ export const returnBook = async (req, res, next) => {
       
       res.status(StatusCodes.OK).json({
          status: `success`,
-         data:{
+         data: {
             oldBook
          }
       })
@@ -322,20 +315,20 @@ export const returnBook = async (req, res, next) => {
 export const getBorrowedBooks = async (req, res, next) => {
    try {
       const borrowedBooks = await prisma.book.findMany({
-         where:{
-            isBooked:true,
-            currentOwnerId:req.user.id
+         where: {
+            isBooked: true,
+            currentOwnerId: req.user.id
          },
-         omit:{
-            isBooked:true,
-            createdAt:true,
-            currentOwnerId:true,
+         omit: {
+            isBooked: true,
+            createdAt: true,
+            currentOwnerId: true
             
          }
       })
       res.status(StatusCodes.OK).json({
-         status:`success`,
-         data:{
+         status: `success`,
+         data: {
             borrowedBooks
          }
       })

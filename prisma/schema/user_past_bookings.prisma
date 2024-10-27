@@ -6,7 +6,6 @@ model UserPastBookings {
   // When book is returned give that time to returnDate
   returnDate DateTime @default(now())
 
-  // This ensures that one book can added to books old booked books fields once
-  @@id([userId, bookId])
+  @@unique([bookId, userId, returnDate])
   @@map("user_past_bookings")
 }
