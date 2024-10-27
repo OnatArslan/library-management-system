@@ -19,7 +19,9 @@ router.route(`/bulk`).post(authenticate, restrict(['ADMIN']), bulkCreateBooks);
 router.route(`/:bookId`).get(getBook).delete(authenticate, restrict(['ADMIN'], deleteBook));
 
 router.route(`/:bookId/borrow`).patch(authenticate, restrict(['USER']), borrowBook);
+
 router.route(`/:bookId/return`).patch(authenticate, restrict(['USER']), returnBook);
+
 router.route(`/:bookId/like`).post(authenticate, restrict(['USER']), addToLikedBooks);
 
 
