@@ -250,6 +250,31 @@ export const addToLikedBooks = async (req, res, next) => {
    }
 }
 
+export const removeFromLikedBooks = async (req,res,next) =>{
+   try {
+      const bookId = req.params.bookId;
+      try {
+         await prisma.userLikedBooks.delete({
+            where:{
+               userId_bookId:{
+                  userId:req.user.id,
+                  bookId:bookId
+               }
+            }
+         })
+      }catch (e) {
+         return next(e);
+      }
+      // Send response with proper message.
+      res.status(204).json({
+         status:`success`,
+         message:`Book removed from your liked book list.`
+      })
+   }catch (e) {
+      next(e);
+   }
+}
+
 export const returnBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
@@ -286,3 +311,4 @@ export const returnBook = async (req, res, next) => {
       next(e);
    }
 };
+
