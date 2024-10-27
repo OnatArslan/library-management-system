@@ -389,7 +389,28 @@ export const getMe = async (req, res, next) => {
          include:{
             currentBooks:{
                select:{
-                  title:true
+                  title:true,
+                  id:true
+               }
+            },
+            likedBooks:{
+               select:{
+                  book:{
+                     select:{
+                        title:true,
+                        id:true
+                     }
+                  }
+               }
+            },
+            oldBookings:{
+               select:{
+               book:{
+                  select:{
+                     title:true,
+                     id:true
+                  }
+               }
                }
             }
          }
