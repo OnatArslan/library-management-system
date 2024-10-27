@@ -293,6 +293,12 @@ export const returnBook = async (req, res, next) => {
                isBooked: false,
                currentOwnerId: null,
                borrowedAt: null,
+               oldBookedBy:{
+                  create:{
+                     userId:req.user.id,
+                     returnDate:new Date(),
+                  }
+               }
             }
          });
       } catch (e) {
