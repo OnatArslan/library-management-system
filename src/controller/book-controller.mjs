@@ -328,9 +328,9 @@ export const getBorrowedBooks = async (req, res, next) => {
          },
       })
       res.status(200).json({
-         status: `success`,
+         status: `zaza`,
          data: {
-         borrowedBooks
+         book:borrowedBooks
          }
       })
    } catch (e) {

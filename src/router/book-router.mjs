@@ -26,6 +26,6 @@ router.route(`/:bookId/liked`).post(authenticate, restrict(['USER']), addToLiked
 
 router.route(`/:bookId/liked`).delete(authenticate, restrict(['USER']), removeFromLikedBooks);
 
-router.route(`/borrowed`).get(authenticate, restrict([`USER`]))
+router.route(`/borrowed`).get(authenticate, restrict([`USER`]),getBorrowedBooks)
 
 export default router;
