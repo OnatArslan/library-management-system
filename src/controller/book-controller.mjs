@@ -327,12 +327,9 @@ export const getBorrowedBooks = async (req, res, next) => {
             currentOwnerId:req.user.id
          },
       })
-      res.status(200).json({
-         status: `zaza`,
-         data: {
-         book:borrowedBooks
-         }
-      })
+      
+      
+      
    } catch (e) {
       next(e)
    }
