@@ -326,9 +326,19 @@ export const getBorrowedBooks = async (req, res, next) => {
             isBooked:true,
             currentOwnerId:req.user.id
          },
+         omit:{
+            isBooked:true,
+            createdAt:true,
+            currentOwnerId:true,
+            
+         }
       })
-      
-      
+      res.status(StatusCodes.OK).json({
+         status:`success`,
+         data:{
+            borrowedBooks
+         }
+      })
       
    } catch (e) {
       next(e)
