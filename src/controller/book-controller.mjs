@@ -110,25 +110,25 @@ export const getBook = async (req, res, next) => {
          where: {
             id: bookId
          },
-         omit:{
-            currentOwnerId:true,
+         omit: {
+            currentOwnerId: true
          },
          include: {
-            currentOwner:{
-               select:{
+            currentOwner: {
+               select: {
                   username: true
                }
             },
-            _count:{
-               select:{
-                  reviews:true,
-                  likedByUsers:true
+            _count: {
+               select: {
+                  reviews: true,
+                  likedByUsers: true
                }
             }
          }
          
       });
-     
+      
       res.status(200).json({
          status: `success`,
          data: {
@@ -166,22 +166,22 @@ export const borrowBook = async (req, res, next) => {
    try {
       const bookId = req.params.bookId;
       const user = await prisma.user.findUnique({
-         where:{
-            id:req.user.id,
+         where: {
+            id: req.user.id
          },
-         omit:{
-            password:true,
+         omit: {
+            password: true
          },
-         include:{
-            _count:{
-               select:{
-                  currentBooks:true
+         include: {
+            _count: {
+               select: {
+                  currentBooks: true
                }
             }
          }
       })
-      if(user._count.currentBooks >= 2 || !user){
-         return next(new AppError("Reached maximum borrow limit.Please return borrowed books to borrow new book!!!"),StatusCodes.NOT_FOUND)
+      if (user._count.currentBooks >= 2 || !user) {
+         return next(new AppError('Reached maximum borrow limit.Please return borrowed books to borrow new book!!!'), StatusCodes.NOT_FOUND)
       }
       
       // Try to find and update a book with given ID
@@ -215,7 +215,36 @@ export const borrowBook = async (req, res, next) => {
 
 export const addToLikedBooks = async (req, res, next) => {
    try {
-   
+      const bookId = req.params.bookId;
+      const book = await prisma.book.findUnique({
+           where: {
+              id: bookId
+           }
+        }
+      );
+      if (!book) {
+         return next(new AppError(`Can not find any book with given ID`, StatusCodes.NOT_FOUND));
+      }
+      
+      let userLikedBook;
+      try {
+         userLikedBook = await prisma.userLikedBooks.create({
+            data:{
+               userId: req.user.id,
+               bookId:book.id
+            }
+         })
+      }catch (e) {
+         return next(e);
+      }
+      
+      res.status(StatusCodes.OK).json({
+         status: `success`,
+         message:`${book.title} added to your liked books.`,
+         data: {
+            userLikedBook
+         }
+      });
    } catch (e) {
       next(e);
    }

@@ -5,7 +5,7 @@ import {
    createBook,
    deleteBook,
    getAllBooks,
-   getBook
+   getBook, addToLikedBooks
 } from '../controller/book-controller.mjs';
 import {authenticate, restrict} from '../controller/auth-controller.mjs';
 
@@ -19,6 +19,7 @@ router.route(`/bulk`).post(authenticate, restrict(['ADMIN']), bulkCreateBooks);
 router.route(`/:bookId`).get(getBook).delete(authenticate, restrict(['ADMIN'], deleteBook));
 
 router.route(`/:bookId/borrow`).patch(authenticate, restrict(['USER']), borrowBook);
+router.route(`/:bookId/like`).post(authenticate, restrict(['USER']), addToLikedBooks);
 
 
 export default router;
