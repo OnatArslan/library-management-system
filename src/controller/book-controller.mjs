@@ -250,11 +250,39 @@ export const addToLikedBooks = async (req, res, next) => {
    }
 }
 
-
 export const returnBook = async (req, res, next) => {
    try {
-   
+      const bookId = req.params.bookId;
+      let oldBook;
+      try {
+         oldBook = await prisma.book.update({
+            where: {
+               id: bookId,
+               currentOwnerId: req.user.id
+            },
+            data: {
+               isBooked: false,
+               currentOwnerId: null,
+               oldBookedBy: {
+                  create: {
+                     userId:req.user.id,
+                     returnDate: new Date()
+                  }
+               }
+            }
+         });
+      } catch (e) {
+         return next(e)
+      }
+      
+      res.status(StatusCodes.OK).json({
+         status: `success`,
+         data:{
+            oldBook
+         }
+      })
+      
    } catch (e) {
       next(e);
    }
-}
+};

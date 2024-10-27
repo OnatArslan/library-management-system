@@ -4,7 +4,7 @@ model UserPastBookings {
   bookId     String
   book       Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
   // When book is returned give that time to returnDate
-  returnDate DateTime
+  returnDate DateTime @default(now())
 
   // This ensures that one book can added to books old booked books fields once
   @@id([userId, bookId])

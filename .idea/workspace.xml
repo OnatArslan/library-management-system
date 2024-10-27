@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8658b8ff-d799-43ba-84ba-cef7394957e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema/user_past_bookings.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema/user_past_bookings.prisma" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/book-controller.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/book-controller.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/book-router.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/book-router.mjs" afterDir="false" />
     </list>
@@ -118,7 +119,7 @@
       <workItem from="1729927282360" duration="54000" />
       <workItem from="1729998590089" duration="561000" />
       <workItem from="1729999166487" duration="115000" />
-      <workItem from="1729999344798" duration="886000" />
+      <workItem from="1729999344798" duration="1667000" />
     </task>
     <servers />
   </component>
