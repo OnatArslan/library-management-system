@@ -386,6 +386,7 @@ export const getMe = async (req, res, next) => {
             passwordResetExpiresIn: true,
             role: true
          },
+         // These include block for test purpose in real project do not include book data in here this is just for test
          include: {
             currentBooks: {
                select: {
