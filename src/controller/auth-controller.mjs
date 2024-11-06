@@ -431,13 +431,3 @@ export const getMe = async (req, res, next) => {
    }
 }
 
-// xd
-// xd
-// xd
-// xd
-// xd
-// xd
-// xd
-// xd
-// xd
-// xd
